@@ -17,7 +17,7 @@ public class ICanWinTest {
         driver = new ChromeDriver();
     }
 
-    @Test
+    @Test (description = "First test,testing test unit")
     public void createPasteBtnTest() {
         driver.get("https://pastebin.com/");
         driver.manage().window().maximize();
