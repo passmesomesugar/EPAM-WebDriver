@@ -1,8 +1,6 @@
 package pageobjectmodel.test;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,14 +18,12 @@ public class ICanWinTest {
 
     @Test(description = "First test,testing test unit")
     public void createPasteBtnTest() {
-        //1 открыть страницу home page
         PastebinHomePage pastebinHomePage = new PastebinHomePage(driver)
                 .openPage()
-                .inputNewPaste("Hell from WD");
-//        .inputNewPaste("Hello from WD");
-//        .setExpirationPeriod("10 Minutes");
-//        .nameNewPaste("helloweb");
-//        .createNewPaste();
+                .pasteNewPaste("Hell from WD")
+                .setExpirationPeriod("1 Day")
+                .nameNewPaste("helloweb")
+                .createNewPaste();
     }
 
     @AfterMethod(alwaysRun = true)
