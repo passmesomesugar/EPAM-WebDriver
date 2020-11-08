@@ -1,9 +1,10 @@
 package pageobjectmodel.page;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public abstract class AbstractPastebinPage {
-    private WebDriver driver;
+    protected WebDriver driver;
 
     protected abstract AbstractPastebinPage openPage();
 
@@ -11,5 +12,6 @@ public abstract class AbstractPastebinPage {
 
     protected AbstractPastebinPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 }

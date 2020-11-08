@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class PastebinHomePage extends AbstractPastebinPage {
     public static final String HOMEPAGE_URL = "https://pastebin.com/";
-    private WebDriver driver;
 
     public PastebinHomePage(WebDriver driver) {
         super(driver);
