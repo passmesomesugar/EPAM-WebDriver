@@ -1,4 +1,4 @@
-package pageobjectmodel.page;
-
-public class NewPasteBin {
-}
+//package pageobjectmodel.page;
+//
+//public class NewPasteBin {
+//}
