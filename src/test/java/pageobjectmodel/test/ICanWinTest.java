@@ -22,7 +22,8 @@ public class ICanWinTest {
     public void createPasteBtnTest() {
         //1 открыть страницу home page
         PastebinHomePage pastebinHomePage = new PastebinHomePage(driver)
-        .openPage();
+                .openPage()
+                .inputNewPaste("Hell from WD");
 //        .inputNewPaste("Hello from WD");
 //        .setExpirationPeriod("10 Minutes");
 //        .nameNewPaste("helloweb");
