@@ -23,6 +23,15 @@ public class PastebinHomePage extends AbstractPastebinPage {
         return this;
     }
 
+    public PastebinHomePage setSyntaxHighlighting(String SyntaxHighlighting) {
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"select2-postform-format-container\"]"));
+        element.click();
+        String expirationPeriodXPath = "//li[text()='" + SyntaxHighlighting + "']";
+        WebElement element2 = driver.findElement(By.xpath(expirationPeriodXPath));
+        element2.click();
+        return this;
+    }
+
     public PastebinHomePage setExpirationPeriod(String expirationPeriod) {
         WebElement element = driver.findElement(By.xpath("//*[@id=\"w0\"]/div[5]/div[1]/div[2]/div/span"));
         element.click();
