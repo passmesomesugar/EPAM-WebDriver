@@ -17,7 +17,7 @@ public class ICanWinTest {
         driver = new ChromeDriver();
     }
 
-    @Test (description = "First test,testing test unit")
+    @Test(description = "First test,testing test unit")
     public void createPasteBtnTest() {
         driver.get("https://pastebin.com/");
         driver.manage().window().maximize();
@@ -35,7 +35,6 @@ public class ICanWinTest {
 //
         WebElement createPasteBtn = driver.findElement(By.xpath("//*[@id=\"w0\"]/div[5]/div[1]/div[8]/button"));
         createPasteBtn.click();
-        //Assert.assertTrue();
     }
 
     @AfterMethod(alwaysRun = true)
