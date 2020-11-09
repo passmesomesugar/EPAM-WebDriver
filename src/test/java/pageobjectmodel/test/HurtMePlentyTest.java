@@ -30,6 +30,7 @@ public class HurtMePlentyTest {
                 .activateComputeEngine()
                 .inputNumberOfInstances()
                 .inputOS()
+                .inputMachineClass()
                 ;
     }
 

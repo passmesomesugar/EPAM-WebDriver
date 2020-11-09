@@ -10,12 +10,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     @FindBy(xpath = "//md-tab-item/div[@title='Compute Engine']")
     private WebElement computeEngine;
+    //
     @FindBy(xpath = "//input[contains(@ng-model,'quantity')]")
     private WebElement numberOfInstances;
+    //
     @FindBy(xpath = "//label[text()='Operating System / Software']/../md-select")
     private WebElement operatingSystem;
+    //
     @FindBy(xpath = "//md-option[@value='free']")
     private WebElement optionFreeOS;
+    //
+    @FindBy(xpath = "//md-select[@placeholder='VM Class']")
+    private WebElement machineClass;
+    //
+    @FindBy(xpath = "//md-select-menu[@style=contains(text(), '')]/descendant::md-option[@value='regular']")
+    private WebElement regularMachine;
 
     public CloudGoogleCalculatorPage(WebDriver driver) {
         super(driver);
@@ -38,6 +47,12 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public CloudGoogleCalculatorPage inputOS() {
         operatingSystem.click();
         optionFreeOS.click();
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage inputMachineClass() {
+        machineClass.click();
+        regularMachine.click();
         return this;
     }
 
