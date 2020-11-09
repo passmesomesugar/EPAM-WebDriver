@@ -1,16 +1,13 @@
-package com.mycompany.app.cloudgoogle;
+package com.mycompany.app.cloudgoogle_pageobjects;
 
-import com.mycompany.app.icanwin.AbstractPastebinPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class AbstractGoogleCloudPage {
+public abstract class AbstractCloudGooglePage {
     protected WebDriver driver;
     public static final String HOMEPAGE_URL = "https://cloud.google.com/";
 
-    protected abstract AbstractPastebinPage openPage();
-
-    protected AbstractGoogleCloudPage(WebDriver driver) {
+    protected AbstractCloudGooglePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

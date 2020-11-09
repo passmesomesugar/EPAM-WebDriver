@@ -1,6 +1,6 @@
 package pageobjectmodel.test;
 
-import com.mycompany.app.icanwin.*;
+import com.mycompany.app.icanwin_and_bringiton_pageobjects.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;

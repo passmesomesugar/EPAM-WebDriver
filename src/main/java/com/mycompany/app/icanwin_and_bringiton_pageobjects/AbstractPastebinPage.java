@@ -1,4 +1,4 @@
-package com.mycompany.app.icanwin;
+package com.mycompany.app.icanwin_and_bringiton_pageobjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
