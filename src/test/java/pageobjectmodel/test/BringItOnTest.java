@@ -1,6 +1,6 @@
 package pageobjectmodel.test;
 
-import com.mycompany.app.icanwin_and_bringiton_pageobjects.*;
+import com.mycompany.app.bringiton.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,17 +31,16 @@ public class BringItOnTest {
                 .setExpirationPeriod("10 Minutes")
                 .nameNewPaste("how to gain dominance among developers")
                 .createNewPaste();
-//
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));
         Assert.assertTrue(driver.findElement(By.xpath("//h1")).getText().equals("how to gain dominance among developers"),
-                "Paste Name / Title doesnt match");
+                "Paste Name / Title doesn't match");
         Assert.assertTrue(driver.findElement(By.xpath("//a[text()='Bash']")).getText().equals("Bash"),
-                "Syntax Highlighting doesnt match ");
+                "Syntax Highlighting doesn't match ");
         Assert.assertTrue(driver.findElement(By.xpath("//ol")).getText().equals("git config --global user.name  \"New Sheriff in Town\"\n" +
                         "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
                         "git push origin master --force"),
-                "Paste doesnt match");
+                "Paste doesn't match");
     }
 
     @AfterMethod(alwaysRun = true)

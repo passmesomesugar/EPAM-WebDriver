@@ -18,13 +18,16 @@ public class HurtMePlentyTest {
 
     @Test(description = "'Hurt me plenty' task test")
     public void openPage() {
-        CloudGoogleSearchPage homePage = new CloudGoogleHomePage(driver)
-                .startPage();
+        CloudGoogleCalculatorPage homePage = new CloudGoogleHomePage(driver)
+                .startPage()
+                .cloudSearchPage()
+                .activateComputeEngine() 
+                .inputNumberOfInstances();
     }
 
     @AfterMethod(alwaysRun = true)
     public void kickBrowser() {
-        driver.quit();
-        driver = null;
+        //driver.quit();
+        //driver = null;
     }
 }
