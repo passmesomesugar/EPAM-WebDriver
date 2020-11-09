@@ -31,6 +31,10 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     //
     @FindBy(xpath = "//*[@id=\"select_option_234\"]")
     private WebElement optionMachineType;
+    //
+    @FindBy(xpath = "//*[contains(@ng-model,'GPU')]")
+    private WebElement GPU;
+    //
 
     public CloudGoogleCalculatorPage(WebDriver driver) {
         super(driver);
@@ -68,6 +72,12 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
         return this;
     }
 
+    public CloudGoogleCalculatorPage inputGPU() {
+        GPU.click();
+        return this;
+    }
+
+    //
     public void waitForVisibility(WebElement element) {
         new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.visibilityOf(element));

@@ -32,12 +32,13 @@ public class HurtMePlentyTest {
                 .inputOS()
                 .inputMachineClass()
                 .inputInstanceType()
+                .inputGPU()
                 ;
     }
 
     @AfterMethod(alwaysRun = true)
     public void kickBrowser() {
-        driver.quit();
-        driver = null;
+//        driver.quit();
+//        driver = null;
     }
 }
