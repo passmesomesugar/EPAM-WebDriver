@@ -1,4 +1,4 @@
-package com.mycompany.app.icanwin_and_bringiton_pageobjects;
+package com.mycompany.app.icanwin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

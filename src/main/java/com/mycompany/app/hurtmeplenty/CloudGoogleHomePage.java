@@ -1,4 +1,4 @@
-package com.mycompany.app.cloudgoogle_pageobjects;
+package com.mycompany.app.hurtmeplenty;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
