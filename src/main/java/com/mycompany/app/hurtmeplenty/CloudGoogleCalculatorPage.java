@@ -25,6 +25,12 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     //
     @FindBy(xpath = "//md-select-menu[@style=contains(text(), '')]/descendant::md-option[@value='regular']")
     private WebElement regularMachine;
+    //
+    @FindBy(xpath = "//md-select[@placeholder='Instance type']")
+    private WebElement machineType;
+    //
+    @FindBy(xpath = "//*[@id=\"select_option_234\"]")
+    private WebElement optionMachineType;
 
     public CloudGoogleCalculatorPage(WebDriver driver) {
         super(driver);
@@ -53,6 +59,12 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public CloudGoogleCalculatorPage inputMachineClass() {
         machineClass.click();
         regularMachine.click();
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage inputInstanceType() {
+        machineType.click();
+        optionMachineType.click();
         return this;
     }
 

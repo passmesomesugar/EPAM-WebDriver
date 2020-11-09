@@ -31,12 +31,13 @@ public class HurtMePlentyTest {
                 .inputNumberOfInstances()
                 .inputOS()
                 .inputMachineClass()
+                .inputInstanceType()
                 ;
     }
 
     @AfterMethod(alwaysRun = true)
     public void kickBrowser() {
-        //driver.quit();
-        //driver = null;
+        driver.quit();
+        driver = null;
     }
 }
