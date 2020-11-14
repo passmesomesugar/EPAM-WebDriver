@@ -31,8 +31,9 @@ public class HurtMePlentyTest {
                 .inputNumberOfInstances()
                 .inputOS()
                 .inputMachineClass()
+                .inputSeries()
                 .inputInstanceType()
-                .inputGPU()
+                //.inputGPU()
                 ;
     }
 
