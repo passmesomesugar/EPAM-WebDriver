@@ -31,9 +31,11 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     @FindBy(xpath = "//md-select[@placeholder='Series']")
     private WebElement seriesElement;
     //
-    //@FindBy(xpath = "//md-option[@value=\"n1\"]")
-    //@FindBy(xpath = "//md-option[@value='n1']")
-    @FindBy(xpath = "//*[@id=\"select_option_186\"]")
+    //@FindBy(xpath = "//md-option[@value=\"n2d\"]")
+    //@FindBy(xpath = "//md-option[@value='\"n1\"']")
+    @FindBy(xpath = "//md-option[@value='n1']")
+    //@FindBy(xpath = "//*[@id=\"select_option_186\"]")
+    //@FindBy(xpath = "//*[@id='select_option_186']")
     private WebElement seriesN1;
     //
     @FindBy(xpath = "//md-select[@placeholder=\"Instance type\"]")
@@ -43,20 +45,22 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     // @FindBy(xpath = "//*[@id='select_value_label_58']/span/*")
     // @FindBy(xpath = "//*[@id=\"select_option_234\"]/div[1]/text()")
     //@FindBy(xpath = "//*[@id=\"select_option_236\"]/div[1]")
-    @FindBy(xpath = "//md-option[@value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8\"]")
+    //@FindBy(xpath = "//md-option[@value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8\"]") //doesnt work ~ strange
+    //@FindBy(xpath = "//*[@id=\"select_option_470\"]")
+    @FindBy(xpath = "//md-option[@value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8\"]") //doesnt work ~ strange
     private WebElement optionMachineType;
     //
     //
     //
     //
     @FindBy(xpath = "//*[contains(@ng-model,'GPU')]")
-    private WebElement GPU;
+    private WebElement addGPU;
     //
     @FindBy(xpath = "//md-select[@placeholder='Number of GPUs']")
     private WebElement numberOfGPUs;
     //
-    //@FindBy(xpath = "//div[normalize-space()='4']/parent::md-option")
-    @FindBy(xpath = "//*[@id=\"select_option_359\"]")
+    @FindBy(xpath = "//div[normalize-space()='1']/parent::md-option")
+    //@FindBy(xpath = "//*[@id=\"select_option_359\"]")
     private WebElement inputNumberOfGPU;
     //
     @FindBy(xpath = "//md-select[@placeholder='GPU type']")
@@ -68,13 +72,13 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     @FindBy(xpath = "//md-select[@placeholder='Local SSD']")
     private WebElement localSSD;
     //
-    @FindBy(xpath = "//div[normalize-space()='24x375 GB']/parent::md-option")
+    @FindBy(xpath = "//div[normalize-space()='2x375 GB']/parent::md-option")
     private WebElement typeLocalSSD;
     //
     @FindBy(xpath = "//md-select[@placeholder='Datacenter location']")
     private WebElement location;
     //
-    @FindBy(xpath = "//md-select-menu[@class='md-overflow']/descendant::div[contains(text(), 'Oregon')]/parent::md-option")
+    @FindBy(xpath = "//md-select-menu[@class='md-overflow']/descendant::div[contains(text(), 'Iowa')]/parent::md-option")
     private WebElement typeLocation;
     //
     @FindBy(xpath = "//md-select[@placeholder='Committed usage']")
@@ -82,7 +86,9 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     //
     @FindBy(xpath = "//md-select-menu[contains(@style, 'transform-origin')]//div[text()='1 Year']/parent::md-option")
     private WebElement typeCommittedUsage;
-//
+    //
+    @FindBy(xpath = "//*[contains(text(),'Add to Estimate')]")
+    private WebElement addToEstimate;
 
     public CloudGoogleCalculatorPage(WebDriver driver) {
         super(driver);
@@ -109,49 +115,83 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     }
 
     public CloudGoogleCalculatorPage inputMachineClass() {
-        machineClass.click();
-        regularMachine.click();
+        click(machineClass);
+        //machineClass.click();
+        click(regularMachine);
+        //regularMachine.click();
         return this;
     }
-    //Select seriesDropdown= new Select(driver.findElement(By.name()))
 
     public CloudGoogleCalculatorPage inputSeries() {
-        seriesElement.click();
+        waitForVisibility(seriesElement);
+        //click(seriesElement); doesnt work
+        seriesElement.click(); //works
+//        seriesElement.sendKeys(Keys.ENTER); //works
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage inputSeriesN1() {
+        // click(seriesN1); doesnt work with '//md-option[@value='"n1"']'
+        // seriesN1.click(); doesnt work with '//md-option[@value='"n1"']'
+        // '//*[@id="select_option_186"]' picks 'N2' series,instead of 'N1'
+        // '//*[@id='select_option_186']' picks 'N2' series,instead of 'N1'
+        // '//md-option[@value='"n1"']' doesnt click anything
+        waitForVisibility(seriesN1);
         seriesN1.click();
         return this;
     }
 
     public CloudGoogleCalculatorPage inputInstanceType() {
+        waitForVisibility(machineType);
         machineType.click();
+        waitForVisibility(optionMachineType);
         optionMachineType.click();
         return this;
     }
 
     public CloudGoogleCalculatorPage inputGPU() {
-        GPU.click();
+        waitForVisibility(addGPU);
+        addGPU.click();
+        waitForVisibility(numberOfGPUs);
         numberOfGPUs.click();
+        waitForVisibility(inputNumberOfGPU);
         inputNumberOfGPU.click();
-        inputNumberOfGPU.sendKeys(Keys.ENTER);
-//        GPUtype.click();
-//        inputTypeOfGPU.click();
+        click(inputNumberOfGPU);
+        // inputNumberOfGPU.sendKeys(Keys.ENTER);
+        waitForVisibility(GPUtype);
+        GPUtype.click();
+        waitForVisibility(inputTypeOfGPU);
+        inputTypeOfGPU.click();
         return this;
     }
 
-    public CloudGoogleCalculatorPage inputSD() {
+    public CloudGoogleCalculatorPage inputSSD() {
+        waitForVisibility(localSSD);
         localSSD.click();
+        waitForVisibility(typeLocalSSD);
         typeLocalSSD.click();
         return this;
     }
 
     public CloudGoogleCalculatorPage inputLocation() {
+        waitForVisibility(location);
         location.click();
+        waitForVisibility(typeLocation);
         typeLocation.click();
         return this;
     }
 
     public CloudGoogleCalculatorPage inputCommitedUsage() {
+        waitForVisibility(committedUsage);
         committedUsage.click();
+        waitForVisibility(typeCommittedUsage);
         typeCommittedUsage.click();
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage addToEstimate() {
+        waitForVisibility(addToEstimate);
+        addToEstimate.click();
         return this;
     }
 

@@ -32,9 +32,13 @@ public class HurtMePlentyTest {
                 .inputOS()
                 .inputMachineClass()
                 .inputSeries()
+                .inputSeriesN1()
                 .inputInstanceType()
-                //.inputGPU()
-                ;
+                .inputGPU()
+                .inputSSD()
+                .inputLocation()
+                .inputCommitedUsage()
+                .addToEstimate();
     }
 
     @AfterMethod(alwaysRun = true)
