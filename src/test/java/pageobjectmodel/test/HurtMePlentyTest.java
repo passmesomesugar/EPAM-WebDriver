@@ -1,8 +1,11 @@
 package pageobjectmodel.test;
 
 import com.mycompany.app.hurtmeplenty.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -41,9 +44,19 @@ public class HurtMePlentyTest {
                 .addToEstimate();
     }
 
+    @Test(dependsOnMethods = "openPage")
+    public void checkMachineClass() {
+        WebElement testMachineClass = driver.findElement(By.xpath("//md-list-item/div[contains(text(),'VM class')]"));
+        Assert.assertTrue(testMachineClass.getText().contains("regular"), "Machine class displayed wrong");
+    }
+    // checkInstanceType
+    // checkRegion
+    // checkLocalSSD
+    // checkCommitmentTerm
+
     @AfterMethod(alwaysRun = true)
     public void kickBrowser() {
-//        driver.quit();
-//        driver = null;
+        driver.quit();
+        driver = null;
     }
 }
