@@ -49,14 +49,40 @@ public class HurtMePlentyTest {
         WebElement testMachineClass = driver.findElement(By.xpath("//md-list-item/div[contains(text(),'VM class')]"));
         Assert.assertTrue(testMachineClass.getText().contains("regular"), "Machine class displayed wrong");
     }
-    // checkInstanceType
-    // checkRegion
-    // checkLocalSSD
-    // checkCommitmentTerm
+
+    @Test(dependsOnMethods = "openPage")
+    public void checkInstanceType() {
+        WebElement testInstanceType = driver.findElement(By.xpath("//md-list-item/div[contains(text(),'Instance type')]"));
+        Assert.assertTrue(testInstanceType.getText().contains("n1-standard-8"), "Instance Type displayed wrong");
+    }
+
+    @Test(dependsOnMethods = "openPage")
+    public void checkRegion() {
+        WebElement testRegion = driver.findElement(By.xpath("//md-list-item/div[contains(text(),'Region')]"));
+        Assert.assertTrue(testRegion.getText().contains("Iowa"), "Region Type displayed wrong");
+    }
+
+    @Test(dependsOnMethods = "openPage")
+    public void checkSSD() {
+        WebElement testSSD = driver.findElement(By.xpath("//md-list-item/div[contains(text(),'SSD')]"));
+        Assert.assertTrue(testSSD.getText().contains("2x375"), "SSD Type displayed wrong");
+    }
+
+    @Test(dependsOnMethods = "openPage")
+    public void checkCommitmentTerm() {
+        WebElement testTerm = driver.findElement(By.xpath("//md-list-item/div[contains(text(),'Commitment term')]"));
+        Assert.assertTrue(testTerm.getText().contains("2x375"), "SSD Type displayed wrong");
+    }
+
+    @Test(dependsOnMethods = "openPage")
+    public void checkEstimateCost() {
+        WebElement testCost = driver.findElement(By.xpath("//md-content[@id='compute']//b"));
+        Assert.assertTrue(testCost.getText().contains("5,413.06"), "Cost displayed wrong");
+    }
 
     @AfterMethod(alwaysRun = true)
     public void kickBrowser() {
-        driver.quit();
-        driver = null;
+//        driver.quit();
+//        driver = null;
     }
 }
