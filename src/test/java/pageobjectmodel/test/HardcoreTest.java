@@ -40,7 +40,10 @@ public class HardcoreTest {
                 .inputLocation()
                 .inputCommitedUsage()
                 .addToEstimate()
-                .emailEstimate();
+                .emailEstimate()
+                .openNewTab()
+
+                ;
     }
 
     @AfterMethod(alwaysRun = true)

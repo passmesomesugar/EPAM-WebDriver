@@ -1,10 +1,11 @@
 package com.mycompany.app.hardcore;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
 
 public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     @FindBy(xpath = "//md-tab-item/div[@title='Compute Engine']")
@@ -198,6 +199,14 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public CloudGoogleCalculatorPage emailEstimate() {
         waitForVisibility(emailEstimateElement);
         emailEstimateElement.click();
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage openNewTab() {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        driver.get("https://tempmailo.com/");
         return this;
     }
 
