@@ -86,6 +86,9 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     //
     @FindBy(xpath = "//*[contains(text(),'Add to Estimate')]")
     private WebElement addToEstimate;
+    //
+    @FindBy(xpath = "//*[contains(text(),'Email Estimate')]")
+    private WebElement emailEstimateElement;
 
     public CloudGoogleCalculatorPage(WebDriver driver) {
         super(driver);
@@ -189,6 +192,12 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public CloudGoogleCalculatorPage addToEstimate() {
         waitForVisibility(addToEstimate);
         addToEstimate.click();
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage emailEstimate() {
+        waitForVisibility(emailEstimateElement);
+        emailEstimateElement.click();
         return this;
     }
 
