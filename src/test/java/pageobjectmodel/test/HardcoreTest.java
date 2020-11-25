@@ -42,8 +42,7 @@ public class HardcoreTest {
                 .addToEstimate()
                 .emailEstimate()
                 .openNewTab()
-
-                ;
+                .pasteTemporaryEmail();
     }
 
     @AfterMethod(alwaysRun = true)

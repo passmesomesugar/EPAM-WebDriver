@@ -90,7 +90,16 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     //
     @FindBy(xpath = "//*[contains(text(),'Email Estimate')]")
     private WebElement emailEstimateElement;
+    //
+    //@FindBy(xpath = "//button[@class='iconx']")
+    @FindBy(xpath = "//*[@id='email']")
+    private WebElement temporaryEmailCopyAddress;
+    //
+    @FindBy(xpath = "//*[@id='color']")
+    private WebElement nightMode;
+    //
 
+    //
     public CloudGoogleCalculatorPage(WebDriver driver) {
         super(driver);
     }
@@ -203,15 +212,27 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     }
 
     public CloudGoogleCalculatorPage openNewTab() {
-        ((JavascriptExecutor) driver).executeScript("window.open()");
+        //ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        ((JavascriptExecutor) driver).executeScript("window.open('https://mail.tm/ru','_blank');");
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage pasteTemporaryEmail() {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        driver.get("https://tempmailo.com/");
+        waitAndClick(temporaryEmailCopyAddress);
+        waitAndClick(nightMode);
         return this;
     }
 
     public void waitForVisibility(WebElement element) {
         new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void waitAndClick(WebElement element) {
+        new WebDriverWait(driver, 20)
+                .until(ExpectedConditions.visibilityOf(element));
+        element.click();
     }
 }
