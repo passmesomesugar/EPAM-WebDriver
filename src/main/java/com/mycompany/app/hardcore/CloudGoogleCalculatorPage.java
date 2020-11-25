@@ -8,6 +8,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 
 public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
+    public CloudGoogleCalculatorPage(WebDriver driver) {
+        super(driver);
+    }
+
+    //
+    static ArrayList<String> tabs;
     @FindBy(xpath = "//md-tab-item/div[@title='Compute Engine']")
     private WebElement computeEngine;
     //
@@ -91,18 +97,17 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     @FindBy(xpath = "//*[contains(text(),'Email Estimate')]")
     private WebElement emailEstimateElement;
     //
-    //@FindBy(xpath = "//button[@class='iconx']")
     @FindBy(xpath = "//*[@id='email']")
     private WebElement temporaryEmailCopyAddress;
     //
     @FindBy(xpath = "//*[@id='color']")
     private WebElement nightMode;
     //
-
+    @FindBy(xpath = "//input[@type='email']")
+    WebElement buttonInputMail;
     //
-    public CloudGoogleCalculatorPage(WebDriver driver) {
-        super(driver);
-    }
+    @FindBy(xpath = "//button[@aria-label='Send Email']")
+    WebElement buttonSendEmail;
 
     public CloudGoogleCalculatorPage activateComputeEngine() {
         driver.switchTo().frame(0);
@@ -212,16 +217,30 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     }
 
     public CloudGoogleCalculatorPage openNewTab() {
-        //ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        ((JavascriptExecutor) driver).executeScript("window.open('https://mail.tm/ru','_blank');");
+        //((JavascriptExecutor) driver).executeScript("window.open('https://mail.tm/ru','_blank');");
+        ((JavascriptExecutor) driver).executeScript("window.open('','_blank');");
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        return this;
+    }
+//    public CloudGoogleCalculatorPage pasteTemporaryEmail() {
+//        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//        driver.switchTo().window(tabs.get(1));
+//        waitAndClick(temporaryEmailCopyAddress);
+//        waitAndClick(nightMode);
+//        return this;
+//    }
+
+    public CloudGoogleCalculatorPage inputEmailAddress() {
+        driver.switchTo().frame(0);
+        driver.switchTo().frame("myFrame");
+        waitForVisibility(buttonInputMail);
+        buttonInputMail.sendKeys(Keys.CONTROL + "v");
         return this;
     }
 
-    public CloudGoogleCalculatorPage pasteTemporaryEmail() {
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-        waitAndClick(temporaryEmailCopyAddress);
-        waitAndClick(nightMode);
+    public CloudGoogleCalculatorPage sendEmail() {
+        waitAndClick(buttonSendEmail);
         return this;
     }
 

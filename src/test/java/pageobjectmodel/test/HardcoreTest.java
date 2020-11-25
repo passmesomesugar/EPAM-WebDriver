@@ -2,6 +2,7 @@ package pageobjectmodel.test;
 
 import com.mycompany.app.hardcore.CloudGoogleCalculatorPage;
 import com.mycompany.app.hardcore.CloudGoogleHomePage;
+import com.mycompany.app.hardcore.ComposeEmail;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -25,7 +26,7 @@ public class HardcoreTest {
 
     @Test(description = "Hardcore task test")
     public void openPage() {
-        CloudGoogleCalculatorPage homePage = new CloudGoogleHomePage(driver)
+        CloudGoogleCalculatorPage cloudGoogleCalculatorPage = new CloudGoogleHomePage(driver)
                 .startPage()
                 .cloudSearchPage()
                 .activateComputeEngine()
@@ -41,8 +42,14 @@ public class HardcoreTest {
                 .inputCommitedUsage()
                 .addToEstimate()
                 .emailEstimate()
-                .openNewTab()
-                .pasteTemporaryEmail();
+                .openNewTab();
+        //
+        ComposeEmail mailService = new ComposeEmail(driver)
+                .getToTempMailServiceHomePage()
+                .turnTheNightModeOn()
+                .copyTemporaryEmail();
+        //
+        //cloudGoogleCalculatorPage.inputEmailAddress();
     }
 
     @AfterMethod(alwaysRun = true)

@@ -29,4 +29,10 @@ public abstract class AbstractCloudGooglePage {
         waitForVisibility(element);
         element.sendKeys(Keys.ENTER);
     }
+
+    public void waitAndClick(WebElement element) {
+        new WebDriverWait(driver, 20)
+                .until(ExpectedConditions.visibilityOf(element));
+        element.click();
+    }
 }
