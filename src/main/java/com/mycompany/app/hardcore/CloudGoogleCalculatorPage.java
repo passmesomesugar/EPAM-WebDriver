@@ -6,14 +6,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public CloudGoogleCalculatorPage(WebDriver driver) {
         super(driver);
     }
 
-    //
     static ArrayList<String> tabs;
+    //
+    //
     @FindBy(xpath = "//md-tab-item/div[@title='Compute Engine']")
     private WebElement computeEngine;
     //
@@ -211,13 +214,12 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     }
 
     public CloudGoogleCalculatorPage emailEstimate() {
-        waitForVisibility(emailEstimateElement);
+        //waitForVisibility(emailEstimateElement);
         emailEstimateElement.click();
         return this;
     }
 
     public CloudGoogleCalculatorPage openNewTab() {
-        //((JavascriptExecutor) driver).executeScript("window.open('https://mail.tm/ru','_blank');");
         ((JavascriptExecutor) driver).executeScript("window.open('','_blank');");
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
@@ -225,22 +227,23 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     }
 //    public CloudGoogleCalculatorPage pasteTemporaryEmail() {
 //        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-//        driver.switchTo().window(tabs.get(1));
-//        waitAndClick(temporaryEmailCopyAddress);
-//        waitAndClick(nightMode);
+//        driver.switchTo().window(tabs.get(0));
 //        return this;
 //    }
 
     public CloudGoogleCalculatorPage inputEmailAddress() {
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
-        waitForVisibility(buttonInputMail);
+        //waitForVisibility(buttonInputMail);
         buttonInputMail.sendKeys(Keys.CONTROL + "v");
         return this;
     }
 
     public CloudGoogleCalculatorPage sendEmail() {
-        waitAndClick(buttonSendEmail);
+//        waitAndClick(buttonSendEmail);
+        buttonSendEmail.click();
         return this;
     }
 

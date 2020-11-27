@@ -49,7 +49,10 @@ public class HardcoreTest {
                 .turnTheNightModeOn()
                 .copyTemporaryEmail();
         //
-        //cloudGoogleCalculatorPage.inputEmailAddress();
+        cloudGoogleCalculatorPage
+                .inputEmailAddress()
+                .sendEmail()
+        ;
     }
 
     @AfterMethod(alwaysRun = true)
