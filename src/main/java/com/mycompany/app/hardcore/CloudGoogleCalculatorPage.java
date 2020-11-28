@@ -1,13 +1,14 @@
 package com.mycompany.app.hardcore;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public CloudGoogleCalculatorPage(WebDriver driver) {
