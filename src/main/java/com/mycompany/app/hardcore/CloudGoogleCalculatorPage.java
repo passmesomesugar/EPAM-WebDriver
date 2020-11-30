@@ -1,9 +1,6 @@
 package com.mycompany.app.hardcore;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +12,7 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
         super(driver);
     }
 
+    public static Double priceOnCalcPage;
     static ArrayList<String> tabs;
     //
     //
@@ -239,12 +237,28 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
         driver.switchTo().frame("myFrame");
         //waitForVisibility(buttonInputMail);
         buttonInputMail.sendKeys(Keys.CONTROL + "v");
+        //buttonInputMail.sendKeys("xgwydpmpp@affecting.org");
         return this;
     }
 
     public CloudGoogleCalculatorPage sendEmail() {
-//        waitAndClick(buttonSendEmail);
         buttonSendEmail.click();
+        return this;
+    }
+
+    public CloudGoogleCalculatorPage getPriceFromCalculator() {
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
+        driver.switchTo().frame(0);
+        driver.switchTo().frame("myFrame");
+        WebElement priceCalculator = new WebDriverWait(driver, 3)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//md-card-content[@id='resultBlock']//div/b[contains(text(),Total)]")));
+        String priceString = priceCalculator
+                .getText()
+                .replace("1 month", "")
+                .replaceAll("[^0-9.]", "");
+        priceOnCalcPage = Double.parseDouble(priceString);
+        System.out.println("Price from calc is: " + priceOnCalcPage);
         return this;
     }
 
