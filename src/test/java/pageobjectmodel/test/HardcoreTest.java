@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import static com.mycompany.app.hardcore.CloudGoogleCalculatorPage.priceOnCalcPage;
+import static com.mycompany.app.hardcore.ComposeEmail.priceInReceivedEMail;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class HardcoreTest {
@@ -42,25 +44,29 @@ public class HardcoreTest {
                 .addToEstimate()
                 .emailEstimate()
                 .openNewTab();
-        //
         ComposeEmail mailService = new ComposeEmail(driver)
                 .getToTempMailServiceHomePage()
                 .turnTheNightModeOn()
                 .copyTemporaryEmail();
-        //
         cloudGoogleCalculatorPage
                 .inputEmailAddress()
                 .sendEmail()
                 .getPriceFromCalculator()
-        ;
+                .moveToEmail();
         mailService
-                .openIncomingEmail();
-                //.getPriceFromReceivedEmail();
+                .openLetter()
+                .getPriceInReceivedEMail()
+        ;
+//        Double cost = mailService.openLetter()
+//                .getCost();
+        System.out.println("Price from calc is: " + priceOnCalcPage);
+        System.out.println("Price from mail is: " + priceInReceivedEMail);
     }
-//    @Test(dependsOnMethods = "openPage")
-//    public void assureSamePrice() {
-//        Assert.assertEquals(ComposeEmail.priceInReceivedEMail, CloudGoogleCalculatorPage.priceOnCalcPage, "Prices received in email and generated on calc page are same");
-//    }
+
+    @Test(dependsOnMethods = "openPage")
+    public void assureEqualPrice() {
+        Assert.assertEquals(priceInReceivedEMail, CloudGoogleCalculatorPage.priceOnCalcPage, "Prices received in email and generated on calc page are same");
+    }
 
     @AfterTest(alwaysRun = true)
     public void kickBrowser() {

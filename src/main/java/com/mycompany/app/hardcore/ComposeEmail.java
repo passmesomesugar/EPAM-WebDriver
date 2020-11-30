@@ -27,11 +27,17 @@ public class ComposeEmail extends AbstractCloudGooglePage {
     @FindBy(xpath = "//*[@id='color']")
     private WebElement nightMode;
     //
-    @FindBy(xpath = "/html/body/div[1]/div/div/div[2]/main/div/div[2]/ul/li/a/div/div[1]/div[2]")
-    private WebElement openMailElement;
+    @FindBy(xpath = "//div[contains(text(), \"Google Cloud Sales\")]")
+    private WebElement letterFromCalculator;
     //
     @FindBy(xpath = "*//h3[contains(text(), 'USD')]")
     private WebElement priceInReceivedEmailElement;
+    //
+    @FindBy(xpath = "//iframe")
+    private WebElement iFrame;
+    //
+    @FindBy(xpath = "//table//h3[contains(text(),\"USD\")]")
+    private WebElement totalEstimatedCostPerMonth;
 
     public ComposeEmail getToTempMailServiceHomePage() {
         driver.get("https://mail.tm/ru");
@@ -49,24 +55,37 @@ public class ComposeEmail extends AbstractCloudGooglePage {
         driver.switchTo().window(tabs.get(0));
         return this;
     }
+//    public ComposeEmail openIncomingEmail() {
+//        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//        driver.switchTo().window(tabs.get(1));
+//        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+//        openMailElement.click();
+//        return this;
+//    }
 
-    public ComposeEmail openIncomingEmail() {
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-        openMailElement.click();
+    public ComposeEmail openLetter() {
+        waitAndClick(letterFromCalculator);
         return this;
     }
 
-    public ComposeEmail getPriceFromReceivedEmail() {
-        WebElement priceInEmail = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[contains(text(), 'USD')]")));
-        String priceInEmailString = priceInEmail
-                .getText()
-                .replace("USD ", "")
-                .replaceAll("[^0-9.]", "");
-        System.out.println("priceInEmailString: " + priceInEmailString);
-        priceInReceivedEMail = Double.parseDouble(priceInEmailString);
-        System.out.println("priceInReceivedEMail: " + priceInReceivedEMail);
-        return this;
+    public void getPriceInReceivedEMail() {
+        waitForVisibility(iFrame);
+        driver.switchTo().frame(0);
+        waitForVisibility(totalEstimatedCostPerMonth);
+//        return Double.parseDouble(totalEstimatedCostPerMonth
+//                .getText().replaceAll("[^0-9.]", ""));
+        priceInReceivedEMail = Double.parseDouble(totalEstimatedCostPerMonth
+                .getText().replaceAll("[^0-9.]", ""));
     }
+//    public ComposeEmail getPriceFromReceivedEmail() {
+//        WebElement priceInEmail = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[contains(text(), 'USD')]")));
+//        String priceInEmailString = priceInEmail
+//                .getText()
+//                .replace("USD ", "")
+//                .replaceAll("[^0-9.]", "");
+//        System.out.println("priceInEmailString: " + priceInEmailString);
+//        priceInReceivedEMail = Double.parseDouble(priceInEmailString);
+//        System.out.println("priceInReceivedEMail: " + priceInReceivedEMail);
+//        return this;
+//    }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public CloudGoogleCalculatorPage(WebDriver driver) {
@@ -224,11 +225,17 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
         driver.switchTo().window(tabs.get(1));
         return this;
     }
-//    public CloudGoogleCalculatorPage pasteTemporaryEmail() {
+
+    //    public CloudGoogleCalculatorPage pasteTemporaryEmail() {
 //        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 //        driver.switchTo().window(tabs.get(0));
 //        return this;
 //    }
+    public void moveToEmail() {
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
 
     public CloudGoogleCalculatorPage inputEmailAddress() {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -258,7 +265,7 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
                 .replace("1 month", "")
                 .replaceAll("[^0-9.]", "");
         priceOnCalcPage = Double.parseDouble(priceString);
-        System.out.println("Price from calc is: " + priceOnCalcPage);
+
         return this;
     }
 
