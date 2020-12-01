@@ -57,8 +57,6 @@ public class HardcoreTest {
                 .openLetter()
                 .getPriceInReceivedEMail()
         ;
-//        Double cost = mailService.openLetter()
-//                .getCost();
         System.out.println("Price from calc is: " + priceOnCalcPage);
         System.out.println("Price from mail is: " + priceInReceivedEMail);
     }
