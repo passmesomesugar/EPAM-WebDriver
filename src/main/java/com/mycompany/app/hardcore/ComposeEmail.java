@@ -1,17 +1,10 @@
 package com.mycompany.app.hardcore;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class ComposeEmail extends AbstractCloudGooglePage {
     public static String tempEmail;
@@ -55,13 +48,6 @@ public class ComposeEmail extends AbstractCloudGooglePage {
         driver.switchTo().window(tabs.get(0));
         return this;
     }
-//    public ComposeEmail openIncomingEmail() {
-//        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-//        driver.switchTo().window(tabs.get(1));
-//        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-//        openMailElement.click();
-//        return this;
-//    }
 
     public ComposeEmail openLetter() {
         waitAndClick(letterFromCalculator);
@@ -72,20 +58,7 @@ public class ComposeEmail extends AbstractCloudGooglePage {
         waitForVisibility(iFrame);
         driver.switchTo().frame(0);
         waitForVisibility(totalEstimatedCostPerMonth);
-//        return Double.parseDouble(totalEstimatedCostPerMonth
-//                .getText().replaceAll("[^0-9.]", ""));
         priceInReceivedEMail = Double.parseDouble(totalEstimatedCostPerMonth
                 .getText().replaceAll("[^0-9.]", ""));
     }
-//    public ComposeEmail getPriceFromReceivedEmail() {
-//        WebElement priceInEmail = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[contains(text(), 'USD')]")));
-//        String priceInEmailString = priceInEmail
-//                .getText()
-//                .replace("USD ", "")
-//                .replaceAll("[^0-9.]", "");
-//        System.out.println("priceInEmailString: " + priceInEmailString);
-//        priceInReceivedEMail = Double.parseDouble(priceInEmailString);
-//        System.out.println("priceInReceivedEMail: " + priceInReceivedEMail);
-//        return this;
-//    }
 }

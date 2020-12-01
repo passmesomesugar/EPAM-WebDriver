@@ -16,7 +16,6 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     public static Double priceOnCalcPage;
     static ArrayList<String> tabs;
     //
-    //
     @FindBy(xpath = "//md-tab-item/div[@title='Compute Engine']")
     private WebElement computeEngine;
     //
@@ -38,27 +37,14 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     @FindBy(xpath = "//md-select[@placeholder='Series']")
     private WebElement seriesElement;
     //
-    //@FindBy(xpath = "//md-option[@value=\"n2d\"]")
-    //@FindBy(xpath = "//md-option[@value='\"n1\"']")
     @FindBy(xpath = "//md-option[@value='n1']")
-    //@FindBy(xpath = "//*[@id=\"select_option_186\"]")
-    //@FindBy(xpath = "//*[@id='select_option_186']")
     private WebElement seriesN1;
     //
     @FindBy(xpath = "//md-select[@placeholder=\"Instance type\"]")
     private WebElement machineType;
-    // @FindBy(xpath = "//span/*[@class='md-text ng-binding' and contains(text(),'e2-standard-8 (vCPUs: 8, RAM: 32GB)')]")
-    // @FindBy(xpath = "//*[@id='select_value_label_58']")
-    // @FindBy(xpath = "//*[@id='select_value_label_58']/span/*")
-    // @FindBy(xpath = "//*[@id=\"select_option_234\"]/div[1]/text()")
-    //@FindBy(xpath = "//*[@id=\"select_option_236\"]/div[1]")
-    //@FindBy(xpath = "//md-option[@value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8\"]") //doesnt work ~ strange
-    //@FindBy(xpath = "//*[@id=\"select_option_470\"]")
+    //
     @FindBy(xpath = "//md-option[@value=\"CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8\"]") //doesnt work ~ strange
     private WebElement optionMachineType;
-    //
-    //
-    //
     //
     @FindBy(xpath = "//*[contains(@ng-model,'GPU')]")
     private WebElement addGPU;
@@ -67,7 +53,6 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     private WebElement numberOfGPUs;
     //
     @FindBy(xpath = "//div[normalize-space()='1']/parent::md-option")
-    //@FindBy(xpath = "//*[@id=\"select_option_359\"]")
     private WebElement inputNumberOfGPU;
     //
     @FindBy(xpath = "//md-select[@placeholder='GPU type']")
@@ -134,26 +119,17 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
 
     public CloudGoogleCalculatorPage inputMachineClass() {
         click(machineClass);
-        //machineClass.click();
         click(regularMachine);
-        //regularMachine.click();
         return this;
     }
 
     public CloudGoogleCalculatorPage inputSeries() {
         waitForVisibility(seriesElement);
-        //click(seriesElement); doesnt work
-        seriesElement.click(); //works
-//        seriesElement.sendKeys(Keys.ENTER); //works
+        seriesElement.click();
         return this;
     }
 
     public CloudGoogleCalculatorPage inputSeriesN1() {
-        // click(seriesN1); doesnt work with '//md-option[@value='"n1"']'
-        // seriesN1.click(); doesnt work with '//md-option[@value='"n1"']'
-        // '//*[@id="select_option_186"]' picks 'N2' series,instead of 'N1'
-        // '//*[@id='select_option_186']' picks 'N2' series,instead of 'N1'
-        // '//md-option[@value='"n1"']' doesnt click anything
         waitForVisibility(seriesN1);
         seriesN1.click();
         return this;
@@ -175,7 +151,6 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
         waitForVisibility(inputNumberOfGPU);
         inputNumberOfGPU.click();
         click(inputNumberOfGPU);
-        // inputNumberOfGPU.sendKeys(Keys.ENTER);
         waitForVisibility(GPUtype);
         GPUtype.click();
         waitForVisibility(inputTypeOfGPU);
@@ -214,7 +189,6 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
     }
 
     public CloudGoogleCalculatorPage emailEstimate() {
-        //waitForVisibility(emailEstimateElement);
         emailEstimateElement.click();
         return this;
     }
@@ -226,11 +200,6 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
         return this;
     }
 
-    //    public CloudGoogleCalculatorPage pasteTemporaryEmail() {
-//        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-//        driver.switchTo().window(tabs.get(0));
-//        return this;
-//    }
     public void moveToEmail() {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
@@ -242,9 +211,7 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
         driver.switchTo().window(tabs.get(0));
         driver.switchTo().frame(0);
         driver.switchTo().frame("myFrame");
-        //waitForVisibility(buttonInputMail);
         buttonInputMail.sendKeys(Keys.CONTROL + "v");
-        //buttonInputMail.sendKeys("xgwydpmpp@affecting.org");
         return this;
     }
 
@@ -265,7 +232,6 @@ public class CloudGoogleCalculatorPage extends AbstractCloudGooglePage {
                 .replace("1 month", "")
                 .replaceAll("[^0-9.]", "");
         priceOnCalcPage = Double.parseDouble(priceString);
-
         return this;
     }
 
