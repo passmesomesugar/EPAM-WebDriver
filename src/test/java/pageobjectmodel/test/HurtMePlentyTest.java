@@ -80,7 +80,7 @@ public class HurtMePlentyTest {
 
     @AfterTest(alwaysRun = true)
     public void kickBrowser() {
-//        driver.quit();
-//        driver = null;
+        driver.quit();
+        driver = null;
     }
 }

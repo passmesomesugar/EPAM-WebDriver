@@ -33,19 +33,16 @@ public class BringItOnTest {
                 .createNewPaste();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));
-        Assert.assertTrue(driver.findElement(By.xpath("//h1")).getText().equals("how to gain dominance among developers"),
-                "Paste Name / Title doesn't match");
-        Assert.assertTrue(driver.findElement(By.xpath("//a[text()='Bash']")).getText().equals("Bash"),
-                "Syntax Highlighting doesn't match ");
-        Assert.assertTrue(driver.findElement(By.xpath("//ol")).getText().equals("git config --global user.name  \"New Sheriff in Town\"\n" +
-                        "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
-                        "git push origin master --force"),
-                "Paste doesn't match");
+        Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "how to gain dominance among developers", "Paste Name / Title doesn't match");
+        Assert.assertEquals(driver.findElement(By.xpath("//a[text()='Bash']")).getText(), "Bash", "Syntax Highlighting doesn't match ");
+        Assert.assertEquals("git config --global user.name  \"New Sheriff in Town\"\n" +
+                "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
+                "git push origin master --force", driver.findElement(By.xpath("//ol")).getText(), "Paste doesn't match");
     }
 
     @AfterMethod(alwaysRun = true)
     public void kickBrowser() {
-//        driver.quit();
-//        driver = null;
+        driver.quit();
+        driver = null;
     }
 }
